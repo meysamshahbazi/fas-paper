@@ -1,0 +1,76 @@
+
+\begin{document}
+	\begin{tikzpicture}
+	\tikzstyle{connection}=[ultra thick,every node/.style={sloped,allow upside down},draw=\edgecolor,opacity=0.7]
+	\node[canvas is zy plane at x=0] (img) at (-5,0,0)
+	{\includegraphics[width=3cm,height=3cm]{img/1_1_09_2f_37.png}};
+	
+	\draw [color=black]
+	(img) node[anchor=south] at (-5,-3){\texttt{Input Face}};
+	%\draw[connection] 
+	\draw[->,thick] (-4.5,0) -- (-4,0);
+	\node[rectangle,
+	draw = orange!80,
+	text = black,
+	fill = orange!20,
+	rotate=270,
+	trapezium stretches = true,
+	minimum width = 4cm, 
+	minimum height = 0.75cm] (t) at (-3.6,0) {$LBP_{tr}$};
+	\draw[->,thick] (-3.2,0) -- (-2.7,0);
+	\node[trapezium,
+	draw = blue!80,
+	text = black,
+	fill = teal!20,
+	rotate=270,
+	trapezium stretches = true,
+	minimum width = 2cm, 
+	minimum height = 3cm] (t) at (-1.2,0) {EfficientNet B0};
+	\draw[->,thick] (0.3,0) -- (0.8,0);
+	
+	\pic[draw=red!80, fill=red!20] (FF) at (1.2,0) {cube={0.25/1.6/0.25/0.25}};
+	\node[color=black, rotate=270,] at (1.2,0) {\small
+		Feature Vector};
+	\draw[->,thick] (1.5,0) -- (2,0);
+	\pic[draw=red!80, fill=red!20] (FN) at (2.4,0) {cube={0.25/1.6/0.25/0.25}};
+	\node[color=black, rotate=270,] at (2.4,0) {\small
+		$L_2 Normalization$};
+	\draw[->,thick] (2.7,0) -- (3.2,0);
+	\node[rectangle,
+	draw = magenta!80,
+	text = black,
+	fill = magenta!20,
+	rotate=270,
+	%rectangle stretches = true,
+	minimum width = 3cm, 
+	minimum height = 2cm] (t) at (4.2,0) {\small Fully connected};
+	
+	\draw[->,thick] (5.2,0) -- (5.7,0);
+	
+	\node[circle,
+	draw=violet,
+	text=black,
+	fill=violet!50] (c) at (6.25,0){0/1};
+	
+	\node[rectangle,
+	draw = black,
+	text = black,
+	fill = yellow!20,
+	%rectangle stretches = true,
+	minimum width = 2cm, 
+	minimum height = 1cm] (ab) at (6.75,2) {$ArcB\;loss$};
+	
+	\node[rectangle,
+	draw = black,
+	text = black,
+	fill = yellow!20,
+	%rectangle stretches = true,
+	minimum width = 2cm, 
+	minimum height = 1cm] (pi) at (1.8,-3) {$Pid\;loss$};
+	\draw [->,thick] (2.4,-1.6) to [out=-90,in=90] (pi.north); 		
+	\draw [->,thick] (c.north) to [out=90,in=-90] (ab.south);	
+\end{tikzpicture}
+
+
+\end{document}
+
